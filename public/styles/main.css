@@ -1,0 +1,316 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border-radius: 10px;
+  border: none;
+}
+
+input:focus {
+  outline: none;
+}
+
+.header-text {
+  font-size: 2.2em;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: rgb(38, 143, 149);
+  padding: 10px 30px;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-primary:hover {
+  background-color: #225b5e;
+  color: #fff;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(38, 143, 149);
+  padding: 30px;
+  color: #fff;
+}
+
+.header-link {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.search {
+  width: 43%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+}
+
+.search-input {
+  padding: 5px;
+  font-size: 18px;
+  width: 315px;
+  margin-right: 10px;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+
+.sort select {
+  margin-right: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.book {
+  width: 75%;
+  display: flex;
+  margin: 20px;
+  padding: 10px;
+}
+
+.book-img {
+  width: 430px;
+  min-height: 680px;
+  margin-right: 25px;
+  object-fit: cover;
+}
+
+.book-info {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.book-info-text {
+  margin-top: 15px;
+}
+
+.rating {
+  font-size: 0;
+}
+
+.star {
+  font-size: 35px;
+  cursor: default;
+  display: inline-block;
+  color: #ccc;
+  margin-right: 5px;
+}
+
+.not_changed_star {
+  font-size: 35px;
+  cursor: default;
+  display: inline-block;
+  color: gold;
+  margin-right: 5px;
+}
+
+#selected-rating {
+  font-weight: bold;
+}
+
+.book-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.book-buttons button {
+  margin-left: 10px;
+}
+
+.book-date {
+  margin-top: 15px;
+}
+
+footer {
+  color: #fff;
+  font-weight: bold;
+  background-color: rgb(38, 143, 149);
+  padding: 40px;
+  text-align: center;
+  margin-bottom: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer-text {
+  font-size: 16px;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 313px;
+  right: 11px;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  display: block;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.search:hover .dropdown-content {
+  display: block;
+}
+
+.small-book {
+  width: 100%;
+  min-height: 60px;
+  max-height: 80px;
+  display: flex;
+  margin: 10px;
+  padding: 2px;
+  word-wrap: break-word;
+}
+
+.small-book-title {
+  word-wrap: break-word;
+  width: 95%;
+}
+
+.small-book-img {
+  object-fit: cover;
+  width: 40px;
+  margin-right: 10px;
+}
+
+.small-book-content {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.small-book-author {
+  margin-top: 3px;
+}
+
+.hidden {
+  display: none;
+}
+
+#spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  right: 20px;
+  top: 15%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+textarea {
+  width: 100%;
+  font-size: 22px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  height: 250px;
+}
+
+textarea:focus {
+  outline: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.star-rating input {
+  display: none;
+}
+
+label {
+  color: gray;
+  font-size: 40px;
+}
+
+.yellow-star {
+  color: gold;
+}
+
+.star-rating label:hover {
+  color: gold;
+}
+
+p {
+  word-wrap: break-word;
+}
+
+.sort-form {
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+}
+
+.sort-form select {
+  text-align: center;
+  width: 60%;
+}
+
+.sort-form select:focus {
+  outline: none;
+  width: 60%;
+}
+
+.sort-form button {
+  width: 30%;
+}

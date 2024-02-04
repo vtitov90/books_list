@@ -1,0 +1,52 @@
+<%- include('partials/header.ejs'); -%>
+
+<main class="content">
+  <div class="sort">
+    <form class="sort-form" action="/sort" method="POST">
+      <select name="criteria">
+        <option value="id">Default</option>
+        <option value="title">Sort by title</option>
+        <option value="author">Sort by author</option>
+        <option value="rating_score">Sort by rating</option>
+      </select>
+      <button type="submit" class="btn-primary">Sort</button>
+    </form>
+  </div>
+  <% if(locals.books) { %> <% locals.books.forEach(book => { %>
+  <div class="book">
+    <img
+      src="<%= book.cover_url%>"
+      loading="lazy"
+      alt="<%= book.title %>"
+      class="book-img"
+    />
+    <div class="book-info">
+      <h2 class="book-info-text"><%= book.title %></h2>
+      <h3 class="book-info-text">By <%= book.author %></h3>
+      <h3 class="book-info-text">Review</h3>
+      <p class="book-info-text"><%= book.review_text %></p>
+      <h4 class="book-date book-info-text"><%= book.review_date %></h4>
+      <div class="rating book-info-text">
+        <% if(book.rating_score) { %> <% for (let i = 0; i < book.rating_score;
+        i++) { %>
+        <span class="not_changed_star">&#9733;</span>
+        <% } %> <% for (let i = book.rating_score; i < 5; i++) { %>
+        <span class="star">&#9733;</span>
+        <% } %> <% } %>
+      </div>
+      <form method="POST">
+        <div class="book-buttons">
+          <button formaction="/edit/<%=book.id %>" class="btn-primary">
+            Edit
+          </button>
+          <button formaction="/delete/<%=book.id %>" class="btn-primary">
+            Delete
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <% }) %> <% } %>
+</main>
+
+<%- include('partials/footer.ejs'); -%>

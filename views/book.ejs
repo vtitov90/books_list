@@ -1,0 +1,47 @@
+<%- include('partials/header.ejs'); -%>
+
+<main class="content">
+  <div class="book">
+    <img src="<%= locals.cover_url%>" alt="Book 1" class="book-img" />
+    <div class="book-info">
+      <h2 class="book-info-text"><%= locals.title %></h2>
+      <h3 class="book-info-text">By <%= locals.author %></h3>
+      <h3 class="book-info-text">Review</h3>
+      <form method="POST">
+        <input
+          type="text"
+          name="title"
+          class="hidden"
+          value="<%= locals.title %>"
+        />
+        <input
+          type="text"
+          name="author"
+          class="hidden"
+          value="<%= locals.author %>"
+        />
+        <textarea name="review" class="book-review book-info-text" wrap="soft"></textarea>
+        <% if(locals.review_date) { %>
+        <h3 class="book-date book-info-text"><%= locals.review_date %></h3>
+        <% }%>
+        <div class="star-rating">
+          <input type="radio" name="rating" id="rating-1" value="1" />
+          <input type="radio" name="rating" id="rating-2" value="2" />
+          <input type="radio" name="rating" id="rating-3" value="3" />
+          <input type="radio" name="rating" id="rating-4" value="4" />
+          <input type="radio" name="rating" id="rating-5" value="5" />
+          <label for="rating-1" class="star">★</label>
+          <label for="rating-2" class="star">★</label>
+          <label for="rating-3" class="star">★</label>
+          <label for="rating-4" class="star">★</label>
+          <label for="rating-5" class="star">★</label>
+        </div>
+        <div class="book-buttons">
+          <button class="btn-primary" formaction="/add">Add to list</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer.ejs'); -%>

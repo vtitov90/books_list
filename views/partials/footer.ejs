@@ -1,0 +1,102 @@
+  <footer>
+    <p class="footer-text">vtitov90. All rights reserved.</p>
+  </footer>
+<script>
+const searchInput = document.querySelector('.search-input');
+const dropdownContent = document.querySelector('.dropdown-content');
+const stars = [...document.querySelectorAll("label")];
+const textarea = document.querySelector('.book-review');
+const SEARCH_RESULTS_NUMBER = 7;
+
+searchInput.addEventListener('input', handleInput);
+
+let abortController = new AbortController();
+
+async function handleInput() {
+  abortController.abort();
+  abortController = new AbortController();
+
+  const inputValue = searchInput.value.trim();
+
+  if (inputValue.length < 3) {
+    dropdownContent.innerHTML = '';
+    return;
+  }
+
+  const formated = inputValue.split(',');
+
+  const title = formated[0] ? `title=${formated[0].trim()}` : '';
+  const author = formated[1] ? `author=${formated[1].trim()}` : '';
+
+  if (title || author) {
+    const apiUrl = `https://openlibrary.org/search.json?&fields=title,author_name&limit=${SEARCH_RESULTS_NUMBER }&${title}${title && author ? '&' : ''}${author}`;
+
+    try {
+      spinner.classList.remove('hidden');
+      const response = await fetch(apiUrl, { signal: abortController.signal });
+      const data = await response.json();
+      dropdownContent.innerHTML = '';
+      console.log(data);
+      let { docs: books } = data;
+      const fragment = document.createDocumentFragment();
+      for (const book of books) {
+        const { title, author_name } = book;
+        const name =
+          author_name && author_name.length > 0
+            ? author_name[0]
+            : "Unknown Author";
+        const coverUrl = `https://covers.openlibrary.org/b/title/${title}-S.jpg`;
+
+        const link = document.createElement("a");
+        const bookDiv = document.createElement("div");
+        const img = document.createElement("img");
+        const contentDiv = document.createElement("div");
+        const h4 = document.createElement("h4");
+        const p = document.createElement("p");
+
+        link.href =`/book?title=${title}&author=${name}`;
+        bookDiv.classList.add("small-book");
+        img.src = coverUrl;
+        img.alt = title;
+        img.classList.add("small-book-img");
+        contentDiv.classList.add("small-book-content");
+        h4.classList.add("small-book-title");
+        h4.textContent = title;
+        p.classList.add("small-book-author");
+        p.textContent = name;
+
+        contentDiv.appendChild(h4);
+        contentDiv.appendChild(p);
+        bookDiv.appendChild(img);
+        bookDiv.appendChild(contentDiv);
+        link.appendChild(bookDiv);
+        fragment.appendChild(link);
+      }
+      spinner.classList.add('hidden');
+      dropdownContent.appendChild(fragment);
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        console.log('Request aborted');
+      } else {
+        console.error('Error fetching data:', error);
+      }
+    }
+  }
+}
+
+stars.forEach((star) =>
+  star.addEventListener("click", function () {
+    stars.forEach((star) => star.classList.remove("yellow-star"));
+    for (const star of stars) {
+      star.classList.add("yellow-star");
+      if (star === this) break;
+    }
+  })
+);
+
+
+
+
+</script>
+</bod>
+</html>
